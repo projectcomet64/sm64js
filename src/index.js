@@ -3,6 +3,7 @@ import { checkForRom } from "./romTextureLoader.js"
 import { GameInstance as Game } from "./game/Game"
 import { playerInputUpdate } from "./player_input_manager"
 import { n64GfxProcessorInstance as GFX } from "./graphics/n64GfxProcessor"
+import { GameViewport } from "./game/Area"
 
 const send_display_list = (gfx_list) => {
     start_render = performance.now()
@@ -140,6 +141,10 @@ document.getElementById("slider").addEventListener('change', (event) => {
 window.enterFullScreenMode = () => {
     const dstCanvas = document.getElementById('fullCanvas')
     dstCanvas.requestFullscreen()
+    dstCanvas.width = window.screen.width*2
+    dstCanvas.height = window.screen.height*2
+    GameViewport.vscale[0] = window.screen.width*2
+    GameViewport.vscale[1] = window.screen.height*2
 }
 
 ///// Start Game

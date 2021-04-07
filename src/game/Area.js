@@ -15,10 +15,13 @@ export const WARP_TRANSITION_FADE_INTO_MARIO   = 0x11
 export const WARP_TRANSITION_FADE_FROM_BOWSER  = 0x12
 export const WARP_TRANSITION_FADE_INTO_BOWSER = 0x13
 
-const D_8032CF00 = {  /// default view port?
-    vscale: [640, 480, 511, 0],
-    vtrans: [640, 480, 511, 0]
+let x_viewport = {  /// Default viewport, exported below
+    vscale: [1280, 720, 0, 0],
+    vtrans: [0, 0, 0, 0]
 }
+
+// expose viewport arrays
+export {x_viewport as GameViewport}
 
 const canvas = document.querySelector('#gameCanvas')
 
@@ -176,7 +179,7 @@ class Area {
         if (this.gCurrentArea) {
             GeoRenderer.geo_process_root(this.gCurrentArea.geometryLayoutData, null, null, null)
 
-            gSPViewport(Game.gDisplayList, D_8032CF00)
+            gSPViewport(Game.gDisplayList, x_viewport)
 
             if (this.gWarpTransition.isActive) {
                 if (this.gWarpTransDelay == 0) {
